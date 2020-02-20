@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.app.hunterkill.uibasics.MainActivity">
+
+
+    <EditText
+        android:id="@+id/valueA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_value_1" />
+
+    <TextView
+        android:id="@+id/notificationValueA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/valueB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_value_2" />
+
+    <TextView
+        android:id="@+id/notificationValueB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:text="Your result" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/subtract"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-" />
+
+    <Button
+        android:id="@+id/multi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="X" />
+
+    <Button
+        android:id="@+id/divide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="/" />
+
+</LinearLayout>
