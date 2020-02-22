@@ -88,16 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (state) {
             case FIRST_OP:
                 if (isNumber(v.getId())) {
-                    String displayNumber = ((Button) v).getText().toString();
-
-                    if (txtResult.getText().toString().equals("0") == true) {
-                        txtResult.setText(displayNumber);
-                    } else if (flagFromEqual == 1) {
-                        flagFromEqual = 0;
-                        txtResult.setText(displayNumber);
-                    } else {
-                        txtResult.setText(txtResult.getText() + displayNumber);
-                    }
+                    addNumFirst_OP(v);
                 } else if (isDot(v.getId())) {
                     addDot(v);
                 } else if (isOperator(v.getId())) {
@@ -126,12 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case SECOND_OP: //start to calculate and print out the result
                 if (isNumber(v.getId())) {
-                    String displayNumber = ((Button) v).getText().toString();
-                    if (txtResult.getText().toString().equals("0") == true) {
-                        txtResult.setText(displayNumber);
-                    } else {
-                        txtResult.setText(txtResult.getText() + displayNumber);
-                    }
+                    addSECOND_OP(v);
                 } else if (isOperator(v.getId())) {
                     setSecondOP();
                     // start Operator
@@ -152,6 +138,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     actSpecialBtn(v);
                 }
                 break;
+        }
+    }
+
+    private void addSECOND_OP(View v) {
+        String displayNumber = ((Button) v).getText().toString();
+        if (txtResult.getText().toString().equals("0") == true) {
+            txtResult.setText(displayNumber);
+        } else {
+            txtResult.setText(txtResult.getText() + displayNumber);
+        }
+    }
+
+    private void addNumFirst_OP(View v) {
+        String displayNumber = ((Button) v).getText().toString();
+
+        if (txtResult.getText().toString().equals("0") == true) {
+            txtResult.setText(displayNumber);
+        } else if (flagFromEqual == 1) {
+            flagFromEqual = 0;
+            txtResult.setText(displayNumber);
+        } else {
+            txtResult.setText(txtResult.getText() + displayNumber);
         }
     }
 
@@ -229,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void resetScreen() {
         operator = "";
         txtResult.setText("0");
+        flagFromEqual = 0;
     }
 
     private void startOperator() {
@@ -292,6 +301,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setSecondOP() {
         basicCalculator.setB(txtResult.getText().toString());
     }
+
     // need to limit range
     private void setFirstOP() {
         basicCalculator.setA(txtResult.getText().toString());
