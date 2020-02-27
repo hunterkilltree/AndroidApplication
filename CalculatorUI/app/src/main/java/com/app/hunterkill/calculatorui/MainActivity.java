@@ -120,11 +120,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     addSECOND_OP(v);
                 } else if (isOperator(v.getId())) {
                     setSecondOP();
-                    // start Operator
-                    startOperator();
 
-                    //display to Screen
-                    displayResult();
+                    procCalculator();
 
                     // set the next operator
                     setOperator(v.getId());
@@ -186,12 +183,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     state = SECOND_OP;
                 } else if (state == SECOND_OP) {
                     setSecondOP();
-                    startOperator();
-                    displayResult();
+
+                    procCalculator();
+
                     state = FIRST_OP;
                     flagFromEqual = 1;
                 }
                 break;
+        }
+    }
+
+    private void procCalculator() {
+        try {
+            // start Operator
+            startOperator();
+
+            //display to Screen
+            displayResult();
+        } catch (IllegalArgumentException iae) {
+            txtResult.setText(iae.getMessage() + "");
+            state = FIRST_OP;
+            flagFromEqual = 1;
         }
     }
 
@@ -243,12 +255,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void startOperator() {
         switch (operator) {
             case "MOD":  // check special condition
-                basicCalculator.operateMod();
-//                if (basicCalculator.getB() != 0) {
-//                    basicCalculator.operateMod();
-//                } else {
-//                    System.out.println("Error second value can not equal 0");
-//                }
+                try {
+                    basicCalculator.operateMod();
+                } catch (IllegalArgumentException iae) {
+                    throw new IllegalArgumentException("Can not mod 0");
+                }
                 break;
             case "ADD":
                 basicCalculator.operateAdd();
@@ -260,12 +271,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 basicCalculator.operateMul();
                 break;
             case "DIV": // check special condition
-                basicCalculator.operateDiv();
-//                if (basicCalculator.getB() != 0) {
-//                    basicCalculator.operateDiv();
-//                } else {
-//                    System.out.println("Error second value can not equal 0");
-//                }
+                try {
+                    basicCalculator.operateDiv();
+                } catch (IllegalArgumentException iae) {
+                    throw new IllegalArgumentException("Can not divide 0");
+                }
 
                 break;
             default:
@@ -304,7 +314,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // need to limit range
     private void setFirstOP() {
-        basicCalculator.setA(txtResult.getText().toString());
+        try {
+            basicCalculator.setA(txtResult.getText().toString());
+        } catch (Exception e) {
+            txtResult.setText("Default first value: 0");
+            basicCalculator.setA("0");
+        }
     }
 
     private boolean isOperator(int id) {

@@ -42,6 +42,9 @@ public class BasicCalculator {
     }
 
     public void operateDiv() {
+        if (this.b == 0 ) {
+            throw new IllegalArgumentException("Can not divide 0");
+        }
         res = this.a / this.b;
     }
 
@@ -50,6 +53,9 @@ public class BasicCalculator {
     }
 
     public void operateMod() {
+        if (this.b == 0 ) {
+            throw new IllegalArgumentException("Can not mod 0");
+        }
         res = this.a % this.b;
     }
 
