@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.app.hunterkill.LiveVideo.MainActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:background="#000000"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btnVoice"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_mic"
+                android:scaleType="fitCenter"
+                android:background="@drawable/button_background"/>
+            <TextView
+                android:id="@+id/txtVoiceStatus"
+                android:visibility="invisible"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="Mic"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:orientation="horizontal"
+            android:background="#000000">
+
+            <ImageButton
+                android:id="@+id/btnTrending"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:src ="@drawable/ic_top_trending"
+                android:background="@drawable/button_background"/>
+            <TextView
+                android:id="@+id/txtTrending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:visibility="invisible"
+                android:text="Trending" />
+
+
+            <ImageButton
+                android:id="@+id/btnSearch"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:src ="@drawable/ic_search"
+                android:background="@drawable/button_background"/>
+            <TextView
+                android:id="@+id/txtSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:visibility="invisible"
+                android:text="Search" />
+
+
+            <ImageButton
+                android:id="@+id/btnPlaylist"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:src ="@drawable/ic_playlist"
+                android:background="@drawable/button_background"/>
+            <TextView
+                android:id="@+id/txtPlaylist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:visibility="invisible"
+                android:text="Play list" />
+
+
+
+            <ImageButton
+                android:id="@+id/btnHistory"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:src ="@drawable/ic_history"
+                android:background="@drawable/button_background" />
+            <TextView
+                android:id="@+id/txtHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:visibility="invisible"
+                android:text="History" />
+
+
+            <ImageButton
+                android:id="@+id/btnFavorite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitEnd"
+                android:src ="@drawable/ic_favorite"
+                android:background="@drawable/button_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:visibility="invisible"
+                android:text="favorite" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:background="#000000"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btnSetting"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_setting"
+                android:scaleType="fitCenter"
+                android:background="@drawable/button_background"/>
+            <TextView
+                android:id="@+id/txtSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:visibility="invisible"
+                android:text="setting"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:background="#ff0000"
+        android:orientation="horizontal"></LinearLayout>
+
+
+
+
+
+</LinearLayout>
