@@ -1,17 +1,21 @@
 package com.app.hunterkill.LiveVideo;
 
 
-import android.provider.MediaStore;
-import android.support.v17.leanback.app.PlaybackFragment;
-import android.support.v17.leanback.app.SearchFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.app.hunterkill.LiveVideo.fragment_pages_class.FavoriteFragment;
+import com.app.hunterkill.LiveVideo.fragment_pages_class.HistoryFragment;
+import com.app.hunterkill.LiveVideo.fragment_pages_class.HomeFragment;
+import com.app.hunterkill.LiveVideo.fragment_pages_class.PlayListFragment;
+import com.app.hunterkill.LiveVideo.fragment_pages_class.SearchingFragment;
+import com.app.hunterkill.LiveVideo.fragment_pages_class.SettingFragment;
+import com.app.hunterkill.LiveVideo.fragment_pages_class.TrendingFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnFocusChangeListener {
 
