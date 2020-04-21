@@ -1,6 +1,7 @@
 package com.app.hunterkill.fishrun;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 /**
  * Created by hunterkill on 12/04/2020.
@@ -29,7 +31,10 @@ public class FlyingFishView extends View {
     private int greenX, greenY, greenSpeed = 20;
     private Paint greenPaint = new Paint();
 
-    private int score ;
+    private  int redX, redY, redSpeed = 25;
+    private Paint redPaint = new Paint();
+
+    private int score, lifePointOfPlayer ;
 
 
     private boolean touch = false;
@@ -56,6 +61,9 @@ public class FlyingFishView extends View {
         greenPaint.setColor(Color.GREEN);
         greenPaint.setAntiAlias(false);
 
+        redPaint.setColor(Color.RED);
+        redPaint.setAntiAlias(false);
+
         scorePaint.setColor(Color.WHITE);
 
         scorePaint.setTextSize(70);
@@ -69,6 +77,7 @@ public class FlyingFishView extends View {
 
         fishY = 550;
         score = 0;
+        lifePointOfPlayer = 3;
     }
 
     @Override
@@ -105,7 +114,7 @@ public class FlyingFishView extends View {
         }
 
 
-        // Yellow Ball
+        // Yellow Ball u
         yellowX = yellowX - yellowSpeed;
 
         if (hitBallChecker(yellowX, yellowY)) {
@@ -132,15 +141,44 @@ public class FlyingFishView extends View {
         }
         canvas.drawCircle(greenX, greenY, 30, greenPaint);
 
+        // Red Ball
+        redX = redX - redSpeed;
+        if (hitBallChecker(redX, redY)) {
+            redX -= 200;
+            lifePointOfPlayer--;
+
+            if (lifePointOfPlayer == 0) {
+                Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
+
+                Intent gameOverIntent = new Intent(getContext(), GameOverAcitvity.class);
+                gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                getContext().startActivity(gameOverIntent);
+
+            }
+        }
+
+        if (redX < 0) {
+            redX = canvasWidth + 21;
+            redY = (int) Math.floor(Math.random() * (maxFishY - minFishY) ) + minFishY;
+        }
+        canvas.drawCircle(redX, redY, 30, redPaint);
+
 
         canvas.drawText( "Score : " + score, 20, 60, scorePaint);
+        for (int i = 0; i < 3; i++) {
+            int x = (int) (580 + life[0].getWidth() * 1.5 * i );
+            int y = 30;
+
+            if (i < lifePointOfPlayer) {
+                canvas.drawBitmap(life[0], x, y, null);
+            }
+            else {
+                canvas.drawBitmap(life[1], x, y, null);
+            }
+        }
 
 
-        canvas.drawBitmap(life[0], 580, 10, null);
 
-        canvas.drawBitmap(life[0], 680, 10, null);
-
-        canvas.drawBitmap(life[0], 780, 10, null);
     }
 
     public boolean hitBallChecker(int x, int y) {
