@@ -5,13 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.app.hunterkill.LiveVideo.fragment_pages_class.FavoriteFragment;
 import com.app.hunterkill.LiveVideo.fragment_pages_class.HistoryFragment;
-import com.app.hunterkill.LiveVideo.fragment_pages_class.HomeFragment;
 import com.app.hunterkill.LiveVideo.fragment_pages_class.PlayListFragment;
 import com.app.hunterkill.LiveVideo.fragment_pages_class.SearchingFragment;
 import com.app.hunterkill.LiveVideo.fragment_pages_class.SettingFragment;
@@ -59,48 +59,72 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
 
 
         // put the first fragment to UI
-        selectFragment(0);
+        //selectFragment(0);
     }
+
+    // for smooth testing because we focus on tivi app.
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_B) {
+//            onBackPressed();
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        Fragment home = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+//        if (getFragmentManager().getBackStackEntryCount() > 0) {
+//            getFragmentManager().popBackStack();
+//        }
+//        else {
+//            super.onBackPressed();
+//        }
+//
+//    }
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        switch (v.getId()) {
-            case R.id.btnVoice:
-                visibleText(txtVoiceStatus, hasFocus);
-                selectFragment(0);
-                break;
-            case R.id.btnTrending:
-                visibleText(txtTrendingStatus, hasFocus);
-                selectFragment(1);
-                break;
-            case R.id.btnSearch:
-                visibleText(txtSearchStatus, hasFocus);
-                selectFragment(2);
-                break;
-            case R.id.btnPlaylist:
-                visibleText(txtPlayListStatus, hasFocus);
-                selectFragment(3);
-                break;
-            case R.id.btnHistory:
-                visibleText(txtHistoryStatus, hasFocus);
-                selectFragment(4);
-                break;
-            case R.id.btnFavorite:
-                visibleText(txtFavoriteStatus, hasFocus);
-                selectFragment(5);
-                break;
-            case R.id.btnSetting:
-                visibleText(txtSettingStatus, hasFocus);
-                selectFragment(6);
-                break;
-            default:
-                break;
-        }
+        if (hasFocus) {
+            switch (v.getId()) {
+                case R.id.btnVoice:
+                    visibleText(txtVoiceStatus, hasFocus);
+                    selectFragment(0);
+                    break;
+                case R.id.btnTrending:
+                    visibleText(txtTrendingStatus, hasFocus);
+                    selectFragment(1);
+                    break;
+                case R.id.btnSearch:
+                    visibleText(txtSearchStatus, hasFocus);
+                    selectFragment(2);
+                    break;
+                case R.id.btnPlaylist:
+                    visibleText(txtPlayListStatus, hasFocus);
+                    selectFragment(3);
+                    break;
+                case R.id.btnHistory:
+                    visibleText(txtHistoryStatus, hasFocus);
+                    selectFragment(4);
+                    break;
+                case R.id.btnFavorite:
+                    visibleText(txtFavoriteStatus, hasFocus);
+                    selectFragment(5);
+                    break;
+                case R.id.btnSetting:
+                    visibleText(txtSettingStatus, hasFocus);
+                    selectFragment(6);
+                    break;
+                default:
+                    break;
+            }
     }
 
+}
     // add Fragment
     Fragment fragment = null;
     String fragmentTag = "";
+
     private void selectFragment(int position) {
         Class fragmentClass = null;
         switch (position) {
@@ -148,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_content, fragment).commitAllowingStateLoss();
         } catch (Exception e) {
-             // Log.e(TAG, "selectFragment " + e.getMessage());
+            // Log.e(TAG, "selectFragment " + e.getMessage());
         }
     }
 
@@ -159,4 +183,11 @@ public class MainActivity extends AppCompatActivity implements View.OnFocusChang
             txt.setVisibility(View.INVISIBLE);
         }
     }
+
+//    private void visibleBackground(ImageButton btnIcon, boolean hasFocus) {
+//        if (hasFocus) {
+//            btnIcon.setBackgroundResource(R.drawable.button_background);
+//        }
+//
+//    }
 }
