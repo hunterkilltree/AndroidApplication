@@ -146,12 +146,13 @@ public class FlyingFishView extends View {
         if (hitBallChecker(redX, redY)) {
             redX -= 200;
             lifePointOfPlayer--;
-
+            // game over
             if (lifePointOfPlayer == 0) {
                 Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
 
                 Intent gameOverIntent = new Intent(getContext(), GameOverAcitvity.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                gameOverIntent.putExtra("score", score);
                 getContext().startActivity(gameOverIntent);
 
             }
