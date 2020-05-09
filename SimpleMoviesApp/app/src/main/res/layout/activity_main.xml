@@ -93,6 +93,11 @@
         android:background="#efe6e6"
         android:orientation="horizontal">
 
+        <FrameLayout
+            android:id="@+id/fragment_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
 
     </LinearLayout>
 

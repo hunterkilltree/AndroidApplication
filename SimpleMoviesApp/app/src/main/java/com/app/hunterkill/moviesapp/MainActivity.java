@@ -1,5 +1,7 @@
 package com.app.hunterkill.moviesapp;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,32 +39,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 invisibleBackground(preButton);
                 visibleBackground(btnAction);
                 preButton = btnAction;
+                selectFragment(1);
+
 //                Toast toast = Toast.makeText(MainActivity.this, "test", Toast.LENGTH_LONG);
 //                toast.show();
-
                 break;
             case R.id.btnDocumentaryMovies:
                 invisibleBackground(preButton);
                 visibleBackground(btnDoc);
                 preButton = btnDoc;
-
-
+                selectFragment(2);
                 break;
             case R.id.btnEpicMovies:
                 invisibleBackground(preButton);
                 visibleBackground(btnEpic);
                 preButton = btnEpic;
-
-
-
+                selectFragment(3);
                 break;
+
             default:
                 break;
 
 
         }
+    }
+
+    Fragment fragment = null;
+    String fragmentTag = "";
+    private void selectFragment(int position) {
+        Class fragmentClass = null;
+        switch (position) {
+            case 1:
+                fragmentClass = ActionMoviesFragment.class;
+                fragmentTag = "ActionMoviesFragment";
+                break;
+            case 2:
+                fragmentClass = DocumentaryMoviesFragment.class;
+                fragmentTag = "DocumentaryMoviesFragment";
+                break;
+            case 3:
+                fragmentClass = EpicMoviesFragment.class;
+                fragmentTag = "EpicMoviesFragment";
+                break;
+            default:
+                break;
+        }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+
+            Bundle bundle = new Bundle();
+
+            bundle.putString("fragmentTag", fragmentTag);
 
 
+            fragment.setArguments(bundle);
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_content, fragment).commitAllowingStateLoss();
+        } catch (Exception e) {
+            // Log.e(TAG, "selectFragment " + e.getMessage());
+        }
     }
 
     private void visibleBackground(ImageButton btnIcon) {
