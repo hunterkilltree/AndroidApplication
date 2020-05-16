@@ -17,11 +17,7 @@ import java.util.List;
 
 public class DocumentaryMoviesFragment extends Fragment {
     private HorizontalGridView gridViewDocumentaryMovies;
-    private FragmentManager fragmentManager;
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+
 
     @Nullable
     @Override
@@ -85,9 +81,8 @@ public class DocumentaryMoviesFragment extends Fragment {
         aList.add(aMedia);
 
 
-        fragmentManager = getFragmentManager();
         //Create Adapter
-        ListAdapter adapter = new ListAdapter(getActivity(), aList, fragmentManager);
+        ListAdapter adapter = new ListAdapter(getActivity(), aList);
         gridViewDocumentaryMovies.setAdapter(adapter);
 
         return view;

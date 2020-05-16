@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v17.leanback.widget.HorizontalGridView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,21 +17,10 @@ import java.util.List;
 
 public class ActionMoviesFragment extends Fragment {
     private HorizontalGridView gridViewActionMovies;
-    private FragmentManager fragmentManager;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        System.out.println("fuc");
-//        if (savedInstanceState != null) {
-        super.onCreate(savedInstanceState);
-//        }
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_action_movies, container, false);
-//        if (savedInstanceState == null) {
 
 
         gridViewActionMovies = view.findViewById(R.id.gridViewActionMovies);
@@ -52,7 +39,6 @@ public class ActionMoviesFragment extends Fragment {
         aMedia.setMediaTitle("getMediaTitle[1]");
         aMedia.setMediaInfo("getMediaInfo[1]");
         aMedia.setMediaThumbnail("https://ubc.sgp1.cdn.digitaloceanspaces.com/npnlab_files/HDONLINE/movie1_icon.jpg");
-//        aMedia.setMediaUrl("https://ubc.sgp1.cdn.digitaloceanspaces.com/npnlab_files/HDONLINE/movie1.mp4");
         aMedia.setMediaUrl("https://drive.google.com/open?id=1-_u8FVUiqfdHwWYmoykzOovDUQlD2nHQ");
         aList.add(aMedia);
 
@@ -92,34 +78,7 @@ public class ActionMoviesFragment extends Fragment {
         aMedia.setMediaUrl("https://drive.google.com/open?id=1-_u8FVUiqfdHwWYmoykzOovDUQlD2nHQ");
         aList.add(aMedia);
 
-
-        fragmentManager = getFragmentManager(); // not use
-        //Create Adapter
-        ListAdapter adapter = new ListAdapter(getActivity(), aList, fragmentManager, new ListAdapter.ItemListenner() {
-            @Override
-            public void ItemClick(int pos) {
-                //TODO HERE
-                if (pos != -1) {
-                    Fragment fragment = null;
-                    Class fragmentClass = PlayVideoFragment.class;
-                    try {
-                        fragment = (Fragment) fragmentClass.newInstance();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("link", aList.get(pos).getMediaUrl());
-//                        System.out.println(aList.get(pos).getMediaUrl());
-                        fragment.setArguments(bundle);
-
-                        // Insert the fragment by replacing any existing fragment
-                        fragmentManager.beginTransaction().replace(R.id.fragment_content, fragment).commitAllowingStateLoss();
-                    } catch (java.lang.InstantiationException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
+        ListAdapter adapter = new ListAdapter(getActivity(), aList);
         gridViewActionMovies.setAdapter(adapter);
         return view;
     }

@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 visibleBackground(btnAction);
                 preButton = btnAction;
                 selectFragment(1);
-//                Toast toast = Toast.makeText(MainActivity.this, "test", Toast.LENGTH_LONG);
-//                toast.show();
                 break;
             case R.id.btnDocumentaryMovies:
                 invisibleBackground(preButton);

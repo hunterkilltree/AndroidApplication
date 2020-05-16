@@ -17,11 +17,7 @@ import java.util.List;
 
 public class EpicMoviesFragment extends Fragment {
     private HorizontalGridView gridViewEpicMovies;
-    private FragmentManager fragmentManager;
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+
 
     @Nullable
     @Override
@@ -85,9 +81,8 @@ public class EpicMoviesFragment extends Fragment {
         aList.add(aMedia);
 
 
-        fragmentManager = getFragmentManager();
         //Create Adapter
-        ListAdapter adapter = new ListAdapter(getActivity(), aList, fragmentManager);
+        ListAdapter adapter = new ListAdapter(getActivity(), aList);
         gridViewEpicMovies.setAdapter(adapter);
         return view;
     }
