@@ -27,11 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAction.setOnClickListener(this);
         btnDoc.setOnClickListener(this);
         btnEpic.setOnClickListener(this);
-
     }
 
     ImageButton preButton;
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 visibleBackground(btnAction);
                 preButton = btnAction;
                 selectFragment(1);
-
 //                Toast toast = Toast.makeText(MainActivity.this, "test", Toast.LENGTH_LONG);
 //                toast.show();
                 break;
@@ -56,11 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 preButton = btnEpic;
                 selectFragment(3);
                 break;
-
             default:
                 break;
-
-
         }
     }
 
@@ -87,12 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             fragment = (Fragment) fragmentClass.newInstance();
 
+            // passing arguments to Fragment
             Bundle bundle = new Bundle();
-
             bundle.putString("fragmentTag", fragmentTag);
-
-
             fragment.setArguments(bundle);
+
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_content, fragment).commitAllowingStateLoss();
