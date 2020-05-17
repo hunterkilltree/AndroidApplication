@@ -34,10 +34,19 @@ import com.squareup.picasso.Picasso;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private Context context;
     private List<MediaModel> elements;
+    ItemListener mListener;
 
-    public ListAdapter(Context c, List<MediaModel> l) {
+    public interface ItemListener{
+        void ItemClick(int pos);
+    }
+
+
+
+
+    public ListAdapter(Context c, List<MediaModel> l,  ItemListener listener) {
         this.context = c;
         this.elements = l;
+        mListener = listener;
 
     }
 
@@ -70,7 +79,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        System.out.println("new ");
         holder.textName.setText(elements.get(position).getMediaTitle());
         holder.textInfo.setText(elements.get(position).getMediaInfo());
         Picasso.get()
@@ -80,7 +88,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 if (prePos == position) {
-//                    mListener.ItemClick(position);
+                    mListener.ItemClick(position);
                 } else {
                     if (preHolder != null) {
                         preHolder.textName.setTextColor(context.getResources().getColor(R.color.defaultColorCard));
@@ -88,7 +96,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     holder.textName.setTextColor(context.getResources().getColor(R.color.colorAccent));
                     preHolder = holder;
                     prePos = position;
-//                    mListener.ItemClick(-1);
+                    mListener.ItemClick(-1);
                 }
             }
         });

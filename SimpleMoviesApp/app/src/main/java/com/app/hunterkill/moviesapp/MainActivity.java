@@ -2,6 +2,7 @@ package com.app.hunterkill.moviesapp;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -86,11 +87,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_content, fragment).commitAllowingStateLoss();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_content, fragment);
+//            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commitAllowingStateLoss();
+
         } catch (Exception e) {
             // Log.e(TAG, "selectFragment " + e.getMessage());
         }
     }
+
+
 
     private void visibleBackground(ImageButton btnIcon) {
         if (btnIcon != null) {

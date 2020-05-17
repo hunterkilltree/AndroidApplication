@@ -37,55 +37,6 @@ import butterknife.Unbinder;
  */
 
 public class PlayVideoFragment extends Fragment {
-//    private PlayerView playerView;
-//    // create ExoPlayer
-//    private SimpleExoPlayer player;
-//
-////    @Override
-////    public void onCreate(@Nullable Bundle savedInstanceState) {
-////        super.onCreate(savedInstanceState);
-////    }
-//
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.layout_play_video, container, false);
-//
-//        playerView = view.findViewById(R.id.play_video);
-//        System.out.println("alo alo alo");
-//
-//
-//        return view;
-//
-//    }
-//
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//
-//
-//        player = ExoPlayerFactory.newSimpleInstance((RenderersFactory) getActivity(), new DefaultTrackSelector());
-//        playerView.setPlayer(player);
-//
-//        // how we get the data
-//        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(), Util.getUserAgent(getActivity(), "test") );
-//
-//        ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse("https://ubc.sgp1.cdn.digitaloceanspaces.com/npnlab_files/HDONLINE/movie1.mp4"));
-//
-//
-//        player.prepare(mediaSource);
-//        player.setPlayWhenReady(true);
-//    }
-//    // clear
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        // clear reference
-//        playerView.setPlayer(null);
-//        player.release();
-//        player = null;
-//    }
-
     @BindView(R.id.play_video)SimpleExoPlayerView mPlayerView;
     private SimpleExoPlayer mPlayer;
     private Unbinder unbinder;
@@ -101,7 +52,7 @@ public class PlayVideoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.layout_play_video, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         String url = getArguments().getString("link");
-//        System.out.println(url);
+        System.out.println(url);
         getPlayer(url);
 
         return rootView;
@@ -110,7 +61,6 @@ public class PlayVideoFragment extends Fragment {
 
     private void getPlayer(String url) {
         // URL of the video to stream
-        // String videoURL = ubc.sgp1.cdn.digitaloceanspaces.com/npnlab_files/HDONLINE/movie1.mp4";
         String videoURL = url;
 
         // Handler for the video player
