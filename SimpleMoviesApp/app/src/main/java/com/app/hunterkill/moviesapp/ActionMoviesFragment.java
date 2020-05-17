@@ -94,7 +94,7 @@ public class ActionMoviesFragment extends Fragment {
                         // Insert the fragment by replacing any existing fragment
                         FragmentManager fragmentManager =  getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_content, fragment);
+                        fragmentTransaction.replace(R.id.placeHolder, fragment);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commitAllowingStateLoss();
                     } catch (java.lang.InstantiationException e) {

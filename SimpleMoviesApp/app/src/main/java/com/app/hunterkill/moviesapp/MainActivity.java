@@ -1,11 +1,14 @@
 package com.app.hunterkill.moviesapp;
 
+import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAction.setOnClickListener(this);
         btnDoc.setOnClickListener(this);
         btnEpic.setOnClickListener(this);
+
+//        hideActionBar();
     }
 
     ImageButton preButton;
@@ -89,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_content, fragment);
-//            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commitAllowingStateLoss();
 
         } catch (Exception e) {
@@ -110,4 +114,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btnIcon.setBackgroundResource(R.drawable.button_normal_state);
         }
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        int currentOrientation = getResources().getConfiguration().orientation;
+
+        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE){
+            System.out.println("Land");
+            hideActionBar();
+            fullScreen();
+        }
+        else {
+            System.out.println("Portrait");
+            showActionBar();
+
+        }
+    }
+
+    private void fullScreen() {
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void showActionBar() {
+//        getSupportActionBar().show();
+    }
+
+    private void hideActionBar() {
+//        getSupportActionBar().hide();
+    }
+
+
+
 }
