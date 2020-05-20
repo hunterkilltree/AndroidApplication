@@ -113,13 +113,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        if(intent.getAction().equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
-            TerminalFragment terminal = (TerminalFragment)getSupportFragmentManager().findFragmentByTag("terminal");
-            if (terminal != null)
-                Toast.makeText(this, "connected", Toast.LENGTH_SHORT).show();
-        }
-        super.onNewIntent(intent);
-    }
+//    @Override
+//    protected void onNewIntent(Intent intent) {
+//        if(intent.getAction().equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
+//            TerminalFragment terminal = (TerminalFragment)getSupportFragmentManager().findFragmentByTag("terminal");
+//            if (terminal != null)
+//                Toast.makeText(this, "connected", Toast.LENGTH_SHORT).show();
+//        }
+//        super.onNewIntent(intent);
+//    }
 }

@@ -7,6 +7,7 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Spannable;
@@ -21,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.hunterkill.terminaluart.util.HexDump;
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
@@ -44,7 +46,7 @@ public class TerminalFragment extends Fragment implements SerialInputOutputManag
     private TextView txtReceiveText;
 
     private SerialInputOutputManager usbIoManager;
-    private Handler mainLooper;
+    private Handler mainLooper = new Handler(Looper.getMainLooper());
 
     private UsbSerialPort usbSerialPort;
 //    private Serial socket;
@@ -65,6 +67,8 @@ public class TerminalFragment extends Fragment implements SerialInputOutputManag
         }
         return new String(hexChars);
     }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,26 +122,29 @@ public class TerminalFragment extends Fragment implements SerialInputOutputManag
                 // Most devices have just one port (port 0)
                 usbSerialPort = driver.getPorts().get(0);
 
-                usbIoManager = new SerialInputOutputManager(usbSerialPort, this);
-                Executors.newSingleThreadExecutor().submit(usbIoManager);
-
                 try {
                     usbSerialPort.open(connection);
                     usbSerialPort.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
+
+                    // doi cho understand bug ; fucking stupid
+                    SerialInputOutputManager usbIoManager = new SerialInputOutputManager(usbSerialPort, this);
+                    Executors.newSingleThreadExecutor().submit(usbIoManager);
 
                     btnSend.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             sendMessage(sendText.getText().toString());
-
                             Toast.makeText(getActivity(), sendText.getText().toString(), Toast.LENGTH_SHORT).show();
 
+                            // color full funny thing
+                            txtReceiveText.append(System.getProperty("line.separator"));
+                            sendText.setText("");
+                            // txtReceiveText.append("A sample string is sent"); for debug
                         }
                     });
 
 
-                    SerialInputOutputManager usbIoManager = new SerialInputOutputManager(usbSerialPort, (SerialInputOutputManager.Listener) getActivity());
-                    Executors.newSingleThreadExecutor().submit(usbIoManager);
+
                 } catch (Exception e) {
 
                 }
@@ -165,42 +172,43 @@ public class TerminalFragment extends Fragment implements SerialInputOutputManag
             SpannableStringBuilder spn = new SpannableStringBuilder(str+'\n');
             txtReceiveText.append(spn);
             byte[] data = (str + newline).getBytes();
-            usbSerialPort.write("1".getBytes(), 1000);
-
+            usbSerialPort.write(str.getBytes(), 2000);
 
         } catch (Exception e) {
-            System.out.println("Send Error");
+//            System.out.println("Send Error");
+            Toast.makeText(getActivity(), "Send Error", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void receive(byte[] data) {
-
-        txtReceiveText.append(new String(data));
-        Toast.makeText(getActivity(), txtReceiveText.getText().toString(), Toast.LENGTH_SHORT).show();
+        SpannableStringBuilder spn = new SpannableStringBuilder();
+        spn.append("receive " + data.length + " bytes\n");
+        if(data.length > 0)
+            spn.append(HexDump.dumpHexString(data)+"\n");
+        txtReceiveText.append(spn);
+        txtReceiveText.append(newline);
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        try {
+            usbSerialPort.close();
+        }catch (Exception e) {}
+    }
 
 
     @Override
-    public void onNewData(final byte[] data) {
+    public void onNewData(byte[] data) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                txtOut.append(Arrays.toString(data));
                 receive(data);
-                Toast.makeText(getActivity(), "fdsada", Toast.LENGTH_SHORT).show();
-
-//                try {
-//                    usbSerialPort.read(data, 1000);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
             }
         });
-
-
+//        mainLooper.post(() -> txtReceiveText.append(data.toString()));
     }
+
 
     @Override
     public void onRunError(Exception e) {
