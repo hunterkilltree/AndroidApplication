@@ -95,14 +95,13 @@ public class MainActivity extends AppCompatActivity
 //            }
             Toast.makeText(this, "nav_terminal", Toast.LENGTH_SHORT).show();
             System.out.println("nav_terminal");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new TerminalFragment(), "devices").commit();
-//            return true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new TerminalFragment(), "terminal").commit();
         } else if (id == R.id.nav_usb_device) {
             Toast.makeText(this, "nav_terminal", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_setting) {
-            Toast.makeText(this, "nav_terminal", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, "nav_setting", Toast.LENGTH_SHORT).show();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new SettingFragment(), "setting").commit();
         } else if (id == R.id.nav_about) {
             Toast.makeText(this, "nav_terminal", Toast.LENGTH_SHORT).show();
 
