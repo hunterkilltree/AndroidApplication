@@ -35,6 +35,18 @@ public class SettingFragment extends ListFragment implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        System.out.println(parent);
+        System.out.println(view);
+        System.out.println(position);
+        System.out.println(id);
+
+        switch (position) {
+            case 0: // Serial
+                getFragmentManager().beginTransaction().replace(R.id.fragment_contain, new TerminalFragment(), "terminal").commit();
+                break;
+            default:
+                break;
+        }
 
     }
 }

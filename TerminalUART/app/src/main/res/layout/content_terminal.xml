@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:id="@+id/terminal"
     tools:context="com.app.hunterkill.terminaluart.MainActivity"
     tools:showIn="@layout/fragment_terminal">
-
 
     <TextView
         android:id="@+id/receive_text"
@@ -17,6 +16,8 @@
         android:layout_weight="0.2"
         android:scrollbars="vertical"
         android:freezesText="true"
+
+        android:text="dfdsafdsafsa"
         android:textColor="@color/colorAccent" />
 
 
@@ -24,7 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <EditText
             android:id="@+id/send_text"
             android:layout_width="0dp"
@@ -36,9 +36,7 @@
             android:id="@+id/btn_send_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:focusedByDefault="false"
             android:src="@drawable/ic_sent_messange" />
-
     </LinearLayout>
 
 
