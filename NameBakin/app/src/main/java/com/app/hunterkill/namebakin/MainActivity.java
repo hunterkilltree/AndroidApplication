@@ -14,7 +14,8 @@ public class MainActivity extends AppCompatActivity implements  ListFragment.OnR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // create an instance of  class ListFragment
-        ListFragment savedFragment = (ListFragment) getSupportFragmentManager().findFragmentByTag(LIST_FRAGMENT);
+        ListFragment savedFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.placeHolder);
+        // if (savedInstanceState == null) // can also use
         if (savedFragment == null) { // prevent re-create Fragment
             ListFragment fragment = new ListFragment();
 
