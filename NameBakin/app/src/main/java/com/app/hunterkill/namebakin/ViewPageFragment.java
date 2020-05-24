@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.support.design.widget.TabLayout;
 
 /**
  * Created by hunterkill on 16/05/2020.
@@ -38,13 +39,19 @@ public class ViewPageFragment extends Fragment {
         viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                if (position == 0) {
-                    return ingredientFragment;
-                } else if (position == 1) {
-                    return directionFragment;
-                }
+//                if (position == 0) {
+//                    return ingredientFragment;
+//                } else if (position == 1) {
+//                    return directionFragment;
+//                }
+//
+//                return null;
+                return position == 0 ? ingredientFragment: directionFragment;
+            }
 
-                return null;
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return position == 0 ? "Ingredient" : "Direction";
             }
 
             @Override
@@ -52,6 +59,10 @@ public class ViewPageFragment extends Fragment {
                 return 2;
             }
         });
+
+        // add TabLayout
+        TabLayout tabLayout = view.findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
         return view;
     }
 

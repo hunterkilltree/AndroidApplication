@@ -27,4 +27,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     compile 'com.android.support:recyclerview-v7:23.2.1'
+    // for TabLayout
+    compile 'com.android.support:design:23.2.1'
+
+
 }
