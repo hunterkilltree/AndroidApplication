@@ -31,6 +31,12 @@ public class ViewPageFragment extends Fragment {
 
         // instance of IngredientFragment, DirectionFragment
         final IngredientFragment ingredientFragment = new IngredientFragment();
+
+        // pass index value to IngredientFragment
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_RECIPE_INDEX, index);
+        ingredientFragment.setArguments(bundle);
+
         final DirectionFragment directionFragment = new DirectionFragment();
 
         // new value for viewPager from fragment_viewpager.xml
