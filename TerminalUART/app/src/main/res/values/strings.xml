@@ -6,6 +6,10 @@
 
     <string name="action_settings">Settings</string>
     <string-array name="setting_list">
+        <item>Baud rate</item>
+        <item>Parity</item>
+        <item>Data bit</item>
+        <item>Stop bit</item>
         <item>Serial</item>
         <item>Terminal</item>
         <item>Receive</item>

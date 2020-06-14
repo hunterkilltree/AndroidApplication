@@ -113,6 +113,7 @@ public class TerminalFragment extends Fragment implements SerialInputOutputManag
         }else {
             Log.d("UART", "UART is available");
             connected = Connected.True;
+            txtReceiveText.append("Connected\n");
 
             UsbSerialDriver driver = availableDrivers.get(0);
             UsbDeviceConnection connection = manager.openDevice(driver.getDevice());
@@ -124,8 +125,8 @@ public class TerminalFragment extends Fragment implements SerialInputOutputManag
 
                 try {
                     usbSerialPort.open(connection);
-                    usbSerialPort.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
-
+//                   usbSerialPort.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
+                    usbSerialPort.setParameters(SerialValue.baudrate, SerialValue.dataBits, SerialValue.stopBits, SerialValue.parity);
                     // doi cho understand bug ; fucking stupid
                     SerialInputOutputManager usbIoManager = new SerialInputOutputManager(usbSerialPort, this);
                     Executors.newSingleThreadExecutor().submit(usbIoManager);

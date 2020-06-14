@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity
 //
 //        // commit the change.
 //        fragmentTransaction.commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contain, new TerminalFragment(), "terminal").commit();
 
 
     }
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         if (id == R.id.nav_terminal) {
             Toast.makeText(this, "nav_terminal", Toast.LENGTH_SHORT).show();
             System.out.println("nav_terminal");
@@ -101,24 +103,24 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_setting) {
             Toast.makeText(this, "nav_setting", Toast.LENGTH_SHORT).show();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contain, new SettingFragment(), "setting").commit();
+            // like shared preferences
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            // add new layer to placeHolder layer (de len)
+            fragmentTransaction.replace(R.id.fragment_contain, new SettingFragment(), "setting");
+
+            // back to previous State
+            fragmentTransaction.addToBackStack(null);
+            // commit the change.
+            fragmentTransaction.commit();
+
         } else if (id == R.id.nav_about) {
             Toast.makeText(this, "nav_terminal", Toast.LENGTH_SHORT).show();
 
         }
 
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        if(intent.getAction().equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
-//            TerminalFragment terminal = (TerminalFragment)getSupportFragmentManager().findFragmentByTag("terminal");
-//            if (terminal != null)
-//                Toast.makeText(this, "connected", Toast.LENGTH_SHORT).show();
-//        }
-//        super.onNewIntent(intent);
-//    }
 }
